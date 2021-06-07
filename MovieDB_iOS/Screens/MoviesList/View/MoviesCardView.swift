@@ -9,6 +9,24 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
+
+struct CardViewOverlay: View {
+    
+    var name: String
+    var body: some View {
+        
+        ZStack{
+            Text(name).font(.callout)
+                .padding(6)
+                .foregroundColor(.white)
+        }.background(Color.black)
+        .opacity(0.8)
+        .cornerRadius(10.0)
+        .padding(6)
+       
+    }
+}
+
 // MARK: View CardView
 struct CardView: View {
     
@@ -21,8 +39,10 @@ struct CardView: View {
         HStack {
             AnimatedImage(url: URL(string: url)!)
                       .resizable()
-                        .placeholder(UIImage(named: "iTunesArtwork"))
-                      .frame(width: 60, height: 60)
+                      .placeholder(UIImage(named: "iTunesArtwork"))
+                      .scaledToFill()
+                .overlay(CardViewOverlay(name: "Meow"), alignment: .bottom)
+                        
                       .clipShape(Circle())
                       .shadow(radius: 20)
                       
@@ -33,6 +53,8 @@ struct CardView: View {
        
     }
 }
+
+
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
